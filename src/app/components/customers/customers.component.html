@@ -6,9 +6,14 @@
         (click)="onSelect(customer)"
     >
         <span class="badge">{{ customer.id }}</span> {{customer.name}}
+        <button class="btn-delete-customer" *ngIf="customer === selectedCustomer" (click)="deleteCustomer(customer)">X</button>
     </li>
 </ul>
 
 <app-customer-detail [customer]="selectedCustomer"></app-customer-detail>
+
+<div class="add-customer">
+    <button (click)="addCustomer()">Add Customer</button>
+</div>
 
 

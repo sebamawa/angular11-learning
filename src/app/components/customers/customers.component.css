@@ -14,3 +14,12 @@
 .customers li.selected {
     color: red;
 }
+
+.add-customer {
+    margin: 20px;
+}
+
+.add-customer button {
+    font-size: medium;
+    position: relative;
+}
