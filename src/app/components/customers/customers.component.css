@@ -1,0 +1,16 @@
+/* CustomersComponent's private CSS styles */
+.customers li {
+    cursor: pointer;
+    position: relative;
+    background-color: #EEE;
+    margin: .5em;
+    padding: .3em;
+}
+
+.customers li:hover {
+    background-color: #DDD;
+}
+
+.customers li.selected {
+    color: red;
+}
