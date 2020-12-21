@@ -30,13 +30,15 @@ export class CustomersComponent implements OnInit {
   }
 
   addCustomer() {
-    let name = prompt("Enter name: ");
+    const name = prompt("Enter name: ");
     if (name) {
+      const id = this.customers ? this.customers.length + 1 : 0;
       let customer = {
-        id: this.customers.length + 1,
+        id: id,
         name: name,
       }
       this.customers.push(customer);
+      // localStorage.setItem("customers", JSON.stringify(this.customers));
     }
   }
 
