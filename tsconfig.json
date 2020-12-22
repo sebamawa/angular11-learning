@@ -12,9 +12,9 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "resolveJsonModule": true,
+    "resolveJsonModule": true, // inicio: para leer json localmente (permite importar archivos json en modulos typescript)
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true, // fin: leer json localmente
     "lib": [
       "es2018",
       "dom"

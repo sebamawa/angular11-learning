@@ -1,5 +1,5 @@
 import { Customer } from '../interfaces/customer';
-import customers_json from './customers.json';
+import customers_json from './customers.json'; // read json with customers data
 
 // let CUSTOMERS = JSON.parse(localStorage.getItem("customers"));
 // if (!CUSTOMERS)
