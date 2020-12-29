@@ -4,7 +4,8 @@ import { AppComponent } from './app.component';
 import { CustomersComponent } from './components/customers/customers.component';
 
 import { FormsModule } from '@angular/forms';
-import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component'; // <-- NgModel lives here
+import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
+import { AppRoutingModule } from './app-routing.module'; // <-- NgModel lives here
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CustomerDetailComponent } from './components/customer-detail/customer-d
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
