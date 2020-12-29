@@ -16,4 +16,8 @@ export class CustomerService {
     // return CUSTOMERS;
     return of(CUSTOMERS); // retorna Observable (para pruebas)
   }
+
+  getCustomer(id: number): Observable<Customer> {
+    return of(CUSTOMERS.find(customer => customer.id == id));
+  }
 }

@@ -10,15 +10,15 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class CustomersComponent implements OnInit {
 
-  selectedCustomer: Customer;
+  // selectedCustomer: Customer;
 
   customers: Customer[]; // array de customers
 
   constructor(private customerService: CustomerService) { }
 
-  onSelect(customer: Customer): void {
-    this.selectedCustomer = customer;
-  }
+  // onSelect(customer: Customer): void {
+  //   this.selectedCustomer = customer;
+  // }
 
   getCustomers(): void {
     this.customerService.getCustomers()
@@ -43,11 +43,11 @@ export class CustomersComponent implements OnInit {
   }
 
   deleteCustomer(customer: Customer) {
-    let ok = confirm("Esta seguro que quiere eliminar el customer ?");
-    if (ok) {
-      this.selectedCustomer = null; // campo enlazado con CustomerDetailComponent
-      this.customers = this.customers.filter(item => item != customer);
-    }
+    // let ok = confirm("Esta seguro que quiere eliminar el customer ?");
+    // if (ok) {
+    //   this.selectedCustomer = null; // campo enlazado con CustomerDetailComponent
+    //   this.customers = this.customers.filter(item => item != customer);
+    // }
   }
 
 }
