@@ -20,6 +20,10 @@ label {
     border-radius: 4px;
     cursor: pointer;
   }
+  .btn-delete-customer {
+    background-color: red;
+    margin-left: 200px;
+  }
   button:hover {
     background-color: #cfd8dc;
   }

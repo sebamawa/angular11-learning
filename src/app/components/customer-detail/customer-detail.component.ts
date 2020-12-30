@@ -25,13 +25,17 @@ export class CustomerDetailComponent implements OnInit {
   }
 
   getCustomer(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id'); // obtengo id de la ruta
     this.customerService.getCustomer(id)
       .subscribe(customer => this.customer = customer);
   }
 
   goBack(): void {
     this.location.back(); // el service Location usa el stack del historico del browser
+  }
+
+  deleteCustomer(id: number) {
+    alert("Por ahora no se eliminan customers (http) ...");
   }
 
 }

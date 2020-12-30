@@ -7,6 +7,7 @@
         <label>name:
             <input [(ngModel)]="customer.name" placeholder="name">
         </label>
+        <button class="btn-delete-customer" (click)="deleteCustomer(customer.id)">X</button>
     </div>
 
     <button (click)="goBack()">go back</button>
