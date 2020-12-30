@@ -20,4 +20,8 @@ export class CustomerService {
   getCustomer(id: number): Observable<Customer> {
     return of(CUSTOMERS.find(customer => customer.id == id));
   }
+
+  deleteCustomer(id: number) {
+    
+  }
 }
