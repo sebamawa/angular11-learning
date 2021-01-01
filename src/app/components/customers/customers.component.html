@@ -1,17 +1,45 @@
-<h2>Customers</h2>
+<!-- <h2>Customers</h2> -->
 
-<ul class="customers">
+<table class="table">
+    <tr style="background-color: bisque;">
+        <th>id</th>
+        <th>name</th>
+        <th>phone</th>
+    </tr>
+    <!-- uso de routerLink en <tr/> (No en <a/>) con estilo .table tr:hover {cursor: pointer} -->
+    <tr *ngFor="let customer of customers" routerLink="/detail/{{customer.id}}">
+        <td>{{customer.id}}</td> 
+        <td>{{customer.name}} </td>   
+        <td>{{customer.phone}}</td>  
+    </tr>
+</table>
+
+<!-- <ul class="customers">
     <li *ngFor="let customer of customers">
         <a routerLink="/detail/{{customer.id}}">
-            <span class="badge">{{customer.id}}</span> {{customer.name}}
-            <!-- [class.selected]="customer === selectedCustomer"
-            (click)="onSelect(customer)" -->
+            <span class="badge">{{customer.id}} - </span> {{customer.name}} - {{customer.phone}}
+            [class.selected]="customer === selectedCustomer"
+            (click)="onSelect(customer)" 
         </a>
-        <!-- <button class="btn-delete-customer" *ngIf="customer === selectedCustomer" (click)="deleteCustomer(customer)">X</button> -->
+        <button class="btn-delete-customer" *ngIf="customer === selectedCustomer" (click)="deleteCustomer(customer)">X</button> 
     </li>
-</ul>
+</ul> -->
 
 <!-- <app-customer-detail [customer]="selectedCustomer"></app-customer-detail> -->
+<br>
+<div class="form-group">
+    <label>Customer name:
+        <input #customerName class="form-control"/>
+    </label> -
+    <label>Customer phone:
+        <input #customerPhone class="form-control"/>
+    </label>    
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="add(customerName.value, customerPhone.value); customerName.value=''; customerPhone.value=''"
+    type="button" class="btn btn-primary">
+        add
+    </button>
+</div>
 
 <div class="add-customer">
     <button (click)="addCustomer()">Add Customer</button>

@@ -1,6 +1,7 @@
 <div *ngIf="customer">
     <h2>{{customer.name | uppercase }} Details</h2>
     <div><span>id: </span>{{customer.id}}</div>
+    <div><span>phone: </span>{{customer.phone}}</div>
     <!-- <div><span>name: </span>{{customer.name }}</div> -->
 
     <div>
@@ -8,7 +9,13 @@
             <input [(ngModel)]="customer.name" placeholder="name">
         </label>
         <button class="btn-delete-customer" (click)="deleteCustomer(customer.id)">X</button>
+        <br>
+        <label>phone:
+            <input [(ngModel)]="customer.phone" placeholder="phone">
+        </label>
     </div>
 
+    <button (click)="save()">save</button>
+    <br>
     <button (click)="goBack()">go back</button>
 </div>

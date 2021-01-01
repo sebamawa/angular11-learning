@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../../interfaces/customer';
 
-import { CustomerService } from '../../services/customer.service';
+import { CustomerService } from '../../services/customers.service';
 
 @Component({
   selector: 'app-customers',
@@ -29,6 +29,7 @@ export class CustomersComponent implements OnInit {
     this.getCustomers();
   }
 
+  // to remove
   addCustomer() {
     const name = prompt("Enter name: ");
     if (name) {
@@ -36,10 +37,21 @@ export class CustomersComponent implements OnInit {
       let customer = {
         id: id,
         name: name,
+        phone: ''
       }
       this.customers.push(customer);
       // localStorage.setItem("customers", JSON.stringify(this.customers));
     }
+  }
+
+  add(name: string, phone: string) {
+    name = name.trim();
+    phone = phone.trim();
+    if (!name) {return;}
+    this.customerService.addCustomer({name, phone} as Customer)
+      .subscribe(customer => {
+        this.customers.push(customer)
+      });
   }
 
   deleteCustomer(customer: Customer) {

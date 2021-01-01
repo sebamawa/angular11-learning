@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../../interfaces/customer';
-import { CustomerService } from '../../services/customer.service';
+import { CustomerService } from '../../services/customers.service';
 
 @Component({
   selector: 'app-dashboard',

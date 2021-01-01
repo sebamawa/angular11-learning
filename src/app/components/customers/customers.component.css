@@ -1,5 +1,10 @@
 /* CustomersComponent's private CSS styles */
-.customers li {
+.table tr:hover {
+    background-color: #DDD;
+    cursor: pointer;
+}
+
+/* .customers li {
     cursor: pointer;
     position: relative;
     background-color: #EEE;
@@ -22,4 +27,4 @@
 .add-customer button {
     font-size: medium;
     position: relative;
-}
+} */

@@ -3,7 +3,7 @@ import { Customer } from '../../interfaces/customer';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { CustomerService } from '../../services/customer.service';
+import { CustomerService } from '../../services/customers.service';
 
 @Component({
   selector: 'app-customer-detail',
@@ -36,6 +36,11 @@ export class CustomerDetailComponent implements OnInit {
 
   deleteCustomer(id: number) {
     alert("Por ahora no se eliminan customers (http) ...");
+  }
+
+  save(): void {
+    this.customerService.updateCustomer(this.customer)
+      .subscribe(() => this.goBack())
   }
 
 }
