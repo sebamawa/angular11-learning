@@ -11,7 +11,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class CustomerService {
 
-  private customersApiUrl = 'http://localhost:3000/customers'; // URL to web api (loopback 4)
+  private customersApiUrl = 'http://192.168.1.49:3000/customers'; // URL to web api (loopback 4)
   // para el put en updateCustomer()
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,7 +30,7 @@ export class CustomerService {
     //y pasa el error a handleError()
     return this.http.get<Customer[]>(this.customersApiUrl)
       .pipe(
-        tap(_ => console.log('...')), // (tap es callback)pasa los valores del Observable 
+        tap(_ => console.log('getCustomers')), // (tap es callback)pasa los valores del Observable 
         catchError(this.handleError<Customer[]>('getCusomers', []))
       );
   }
@@ -40,7 +40,7 @@ export class CustomerService {
     const url = `${this.customersApiUrl}/${id}`;
     return this.http.get<Customer>(url)
       .pipe(
-        tap(_ => console.log('...')),
+        tap(_ => console.log(`getCustomer id=${id}`)),
         catchError(this.handleError<Customer>(`getCustomer id=${id}`))
       );
   }
@@ -65,8 +65,15 @@ export class CustomerService {
       );
   }
 
-  deleteCustomer(id: number) {
-    
+  /** DELETE: delete the hero from the server */
+  deleteCustomer(customer: Customer | number): Observable<Customer> {
+    const id = typeof customer === 'number' ? customer : customer.id;
+    const url = `${this.customersApiUrl}/${id}`;
+
+    return this.http.delete<Customer>(url, this.httpOptions).pipe(
+      tap(_ => console.log('customer deleted')),
+      catchError(this.handleError<Customer>('deleteHero'))
+    );
   }
 
   /**

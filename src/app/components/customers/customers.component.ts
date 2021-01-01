@@ -54,12 +54,14 @@ export class CustomersComponent implements OnInit {
       });
   }
 
-  deleteCustomer(customer: Customer) {
-    // let ok = confirm("Esta seguro que quiere eliminar el customer ?");
-    // if (ok) {
-    //   this.selectedCustomer = null; // campo enlazado con CustomerDetailComponent
-    //   this.customers = this.customers.filter(item => item != customer);
-    // }
+  delete(customer: Customer): void {
+    let ok = confirm(`Está seguro que desea eliminar el customer: ${customer.name} con id: ${customer.id}`);
+    if (ok) {
+      // componente tiene responsabilidad de actualizar la lista de customers
+      this.customers = this.customers.filter(c => c !== customer);
+      // se espera que el customer se elimine con exito del server
+      this.customerService.deleteCustomer(customer).subscribe();
+    }
   }
 
 }
