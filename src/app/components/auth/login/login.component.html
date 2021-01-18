@@ -5,7 +5,7 @@
                       <input #userEmail class="form-control"/>
                   </label> &nbsp; <br>
                   <label>Password:
-                      <input #userPassword class="form-control"/>
+                      <input type="password" #userPassword class="form-control"/>
                   </label> <br>   
                   <!-- (click) passes input value to add() and then clears the input -->
                   <button (click)="onLogin(userEmail.value, userPassword.value); userEmail.value=''; userPassword.value=''"
@@ -14,7 +14,7 @@
                   </button>
               </div>
 
-              <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+ 
               <div class="form-group">
                 <a routerLink="/user/register" class="form-control login-user">Are you new ?</a>
               </div>

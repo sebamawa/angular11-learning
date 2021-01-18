@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../interfaces/user';
 
 @Injectable({
@@ -19,7 +20,7 @@ export class AuthService {
     const url = `${this.usersApiUrl}\signup`;
 
     return this.http.post<User>(url, {realm, username, email, password},
-      { headers: this.httpOptions.headers });
+      this.httpOptions); //{ headers: this.httpOptions.headers });
     //.pipe()
   }
 
@@ -27,25 +28,51 @@ export class AuthService {
     const url = `${this.usersApiUrl}/users/login`;
 
     return this.http
-      .post<string>(url, {email, password}, {headers: this.httpOptions.headers})
-      ;//.pipe(data => );
+      .post<string>(url, {email, password}, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<User>(`loginUser()`))
+      );
   }
 
-  private setToken(token): void{
-    localStorage.setItem("JWSToken", token);
+  setToken(token: string): void{
+    localStorage.setItem("jws_token", Object.values(token)[0]);
   }
 
   private getToken(): string {
-    return localStorage.getItem("JWSToken");
+    return localStorage.getItem("jws_token");
   }
 
   // private getCurrentUser(): User {
   //   let user_string = localStorage.getItem("currentUser");
   // }
 
-  logoutUser() {
+  logoutUser(): void {
     // let jwsToken = localStorage.getItem('JWSToken');
     localStorage.removeItem('JWSToken');
     // no es necesario hacer logout en el server
   }
+
+  checkUserLogged(): boolean {
+    // mejorar checkeo de user logeado
+    // solo verifica si esta el token en el localstorage
+    let tk = this.getToken();
+    if (tk)
+      return true;
+    else
+      return false;
+  }
+
+  /**
+   * maneja la operacion Http que falla y permite a la app continuar
+   * @param operation - nombre de la operacion que falla
+   * @param result - valor opcional para retornar un resultado Observable
+   */
+  private handleError<T>(operation = 'opeation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.log(error);
+
+      // la app continua corriendo retornando un resultado vacio
+      return of(result as T);
+    } 
+  } 
 }
