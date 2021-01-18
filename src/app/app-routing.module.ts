@@ -4,12 +4,16 @@ import {RouterModule, Routes} from '@angular/router';
 import {CustomersComponent} from './components/customers/customers.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {CustomerDetailComponent} from './components/customer-detail/customer-detail.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'customers', component: CustomersComponent},
-  {path: 'detail/:id', component: CustomerDetailComponent}
+  {path: 'detail/:id', component: CustomerDetailComponent},
+  {path: 'user/login', component: LoginComponent},
+  {path: 'user/register', component: RegisterComponent}
 ];
 
 @NgModule({

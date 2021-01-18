@@ -8,6 +8,8 @@ import { CustomerDetailComponent } from './components/customer-detail/customer-d
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component'; // <-- NgModel lives here
 import {HttpClientModule} from '@angular/common/http';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import {HttpClientModule} from '@angular/common/http';
     CustomersComponent,
     CustomerDetailComponent,
     DashboardComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

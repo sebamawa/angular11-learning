@@ -11,7 +11,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class CustomerService {
 
-  private customersApiUrl = 'http://192.168.1.49:3000/customers'; // URL to web api (loopback 4)
+  private customersApiUrl = 'http://localhost:3000/customers'; // URL to web api (loopback 4)
   // para el put en updateCustomer()
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -31,7 +31,7 @@ export class CustomerService {
     return this.http.get<Customer[]>(this.customersApiUrl)
       .pipe(
         tap(_ => console.log('getCustomers')), // (tap es callback)pasa los valores del Observable 
-        catchError(this.handleError<Customer[]>('getCusomers', []))
+        catchError(this.handleError<Customer[]>('getCustomers', []))
       );
   }
 
