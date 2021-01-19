@@ -3,7 +3,7 @@
         <a *ngIf="isLogged" class="navbar-brand" routerLink="/dashboard">Dashboard</a> 
         <a *ngIf="isLogged" class="navbar-brand" routerLink="/customers">Customers</a>
         <a *ngIf="!isLogged" class="navbar-brand" routerLink="/users/login">Login</a>
-        <button *ngIf="isLogged" class="navbar-brand" (click)="onLogout()">Logout</button>
+        <a *ngIf="isLogged" class="navbar-brand" style="cursor:pointer" (click)="onLogout()">Logout</a>
         {{isLogged}}
 </nav>
     

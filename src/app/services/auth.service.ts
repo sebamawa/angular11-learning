@@ -12,6 +12,7 @@ export class AuthService {
   private usersApiUrl = 'http://localhost:3000'; 
 
   constructor(private http: HttpClient) { }
+  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -49,7 +50,7 @@ export class AuthService {
   logoutUser(): void {
     // let jwsToken = localStorage.getItem('JWSToken');
     localStorage.removeItem('jws_token');
-    window.location.reload();
+    // window.location.reload();
     // no es necesario hacer logout en el server
   }
 

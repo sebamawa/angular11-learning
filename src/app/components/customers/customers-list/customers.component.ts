@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer } from '../../interfaces/customer';
+import { Customer } from '../../../interfaces/customer';
 
-import { CustomerService } from '../../services/customers.service';
+import { CustomerService } from '../../../services/customers.service';
 
 @Component({
   selector: 'app-customers',
@@ -47,7 +47,11 @@ export class CustomersComponent implements OnInit {
   add(name: string, phone: string) {
     name = name.trim();
     phone = phone.trim();
-    if (!name) {return;}
+    // if (!name || !phone) {return;} // se necesitan ambos campos
+    if (!name || !phone) {
+      alert('Name and phone are required.');
+      return;
+    }
     this.customerService.addCustomer({name, phone} as Customer)
       .subscribe(customer => {
         this.customers.push(customer)

@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
         this.authService.setToken(token);
         this.router.navigateByUrl('/customers');
         //this.router.navigate(['/customers']);
-        location.reload();
+        // location.reload();
       });
   }
 

@@ -32,22 +32,26 @@
 <!-- <app-customer-detail [customer]="selectedCustomer"></app-customer-detail> -->
 <br>
 <div class="form-group">
+    <!-- Forma 'rápida' de construir un formulario sin binding a modelo -->
     <label>Customer name:
-        <input #customerName class="form-control"/>
+        <!-- '#customerName' es una variable de referencia (de template). required not working -->
+        <input #customerName class="form-control" [required]/> 
     </label> &nbsp;
     <label>Customer phone:
         <input #customerPhone class="form-control"/>
     </label>    
     <!-- (click) passes input value to add() and then clears the input -->
-    <button (click)="add(customerName.value, customerPhone.value); customerName.value=''; customerPhone.value=''"
-    type="button" class="btn btn-primary">
+    <button (click)="add(customerName.value, customerPhone.value); customerName.value=''; customerPhone.value=''" 
+        type="button" class="btn btn-primary">
         add
     </button>
 </div>
 
 <div class="add-customer">
-    <button (click)="addCustomer()">Add Customer</button>
+    <button (click)="addCustomer()">Add Customer old</button>
 </div>
+<hr>
+<app-customer-form></app-customer-form>
 
 
 

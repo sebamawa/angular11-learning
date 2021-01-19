@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {CustomersComponent} from './components/customers/customers.component';
+import {CustomersComponent} from './components/customers/customers-list/customers.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {CustomerDetailComponent} from './components/customer-detail/customer-detail.component';
+import {CustomerDetailComponent} from './components/customers/customer-detail/customer-detail.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 
