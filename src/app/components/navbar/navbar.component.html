@@ -2,8 +2,8 @@
     <!-- <nav class="navbar navbar-light" style="background-color: #e3f2fd;">    -->
         <a *ngIf="isLogged" class="navbar-brand" routerLink="/dashboard">Dashboard</a> 
         <a *ngIf="isLogged" class="navbar-brand" routerLink="/customers">Customers</a>
-        <a class="navbar-brand" routerLink="/users/login">Login</a>
-        <a *ngIf="isLogged" class="navbar-brand" routerLink="">Logout</a>
+        <a *ngIf="!isLogged" class="navbar-brand" routerLink="/users/login">Login</a>
+        <button *ngIf="isLogged" class="navbar-brand" (click)="onLogout()">Logout</button>
         {{isLogged}}
 </nav>
     

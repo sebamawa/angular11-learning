@@ -48,7 +48,8 @@ export class AuthService {
 
   logoutUser(): void {
     // let jwsToken = localStorage.getItem('JWSToken');
-    localStorage.removeItem('JWSToken');
+    localStorage.removeItem('jws_token');
+    window.location.reload();
     // no es necesario hacer logout en el server
   }
 
