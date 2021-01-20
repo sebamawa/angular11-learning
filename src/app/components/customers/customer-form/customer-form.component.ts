@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CustomerService } from 'src/app/services/customers.service';
 import { Customer } from '../../../interfaces/customer';
 
@@ -9,7 +9,10 @@ import { Customer } from '../../../interfaces/customer';
 })
 export class CustomerFormComponent implements OnInit {
 
-  model = new Customer(50, 'Alberto', '099123456');
+  // para enviar nuevo customer tomado del form al padre customers-list
+  @Output() newCustomerEmitted = new EventEmitter<Customer>();
+
+  model = new Customer('', '');
 
   submitted = false;
 
@@ -20,22 +23,24 @@ export class CustomerFormComponent implements OnInit {
   // onSubmit() { this.submitted = true }
 
   onSubmit(name: string, phone: string) {
+    // console.log(`name=${name} - phone=${phone}`);
     name = name.trim();
     phone = phone.trim();
-    // if (!name || !phone) {return;} // se necesitan ambos campos
-    // if (!name || !phone) {
-    //   alert('Name and phone are required.');
-    //   return;
-    // }
-    this.customerService.addCustomer({name, phone} as Customer)
-      .subscribe(customer => {
-        // this.customers.push(customer) // COMO ACCEDO A LA COLECCION
-      });
+    // el padre customers-list se encarga de hacer el post y actualizar la lista de customers
+    //this.newCustomerEmitted.emit(new Customer(name, phone));
+    this.newCustomerEmitted.emit({name, phone} as Customer);
+    this.model.name=''; // se limpia en el template
+    this.model.phone='';
+    // this.customerService.addCustomer({name, phone} as Customer)
+    //   .subscribe(customer => {
+    //     // actualizo la lista de customers en el padre customers-list
+    //     this.newCustomerEmitted.emit(customer);
+    //   });
   }
 
-  newCustomer() {
-    this.model = new Customer(42, '', '');
-  }
+  // newCustomer() {
+  //   this.model = new Customer(42, '', '');
+  // }
 
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.model) }

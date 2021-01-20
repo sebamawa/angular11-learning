@@ -3,11 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../interfaces/user';
+import { Subject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private isLoggedSubjectSource = new Subject<void>();
+  public isLoggedSubject$ = this.isLoggedSubjectSource.asObservable();
 
   private usersApiUrl = 'http://localhost:3000'; 
 

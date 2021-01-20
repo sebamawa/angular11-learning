@@ -29,19 +29,14 @@ export class CustomersComponent implements OnInit {
     this.getCustomers();
   }
 
-  // to remove
-  addCustomer() {
-    const name = prompt("Enter name: ");
-    if (name) {
-      const id = this.customers ? this.customers.length + 1 : 0;
-      let customer = {
-        id: id,
-        name: name,
-        phone: ''
-      }
-      this.customers.push(customer);
-      // localStorage.setItem("customers", JSON.stringify(this.customers));
-    }
+  // para form con FormModule
+  addCustomer(customer: Customer) {
+    if (customer) {
+      this.customerService.addCustomer(customer)
+      .subscribe(customer => {
+        this.customers.push(customer)
+      });      
+    } 
   }
 
   add(name: string, phone: string) {
@@ -59,7 +54,7 @@ export class CustomersComponent implements OnInit {
   }
 
   delete(customer: Customer): void {
-    let ok = confirm(`Está seguro que desea eliminar el customer: ${customer.name} con id: ${customer.id}`);
+    let ok = confirm(`Está seguro que desea eliminar el customer: ${customer} con id: ${customer.id}`);
     if (ok) {
       // componente tiene responsabilidad de actualizar la lista de customers
       this.customers = this.customers.filter(c => c !== customer);
