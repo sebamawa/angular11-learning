@@ -1,21 +1,26 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../interfaces/user';
 import { Subject } from "rxjs";
+import { Customer } from '../interfaces/customer';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private isLoggedSubjectSource = new Subject<void>();
-  public isLoggedSubject$ = this.isLoggedSubjectSource.asObservable();
+  //private isLoggedSubjectSource = new Subject<void>();
+  //public isLoggedSubject$ = this.isLoggedSubjectSource.asObservable();
+  @Output() isUserLogguedEmmit = new EventEmitter<boolean>();
 
   private usersApiUrl = 'http://localhost:3000'; 
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router) { }
   
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -56,6 +61,9 @@ export class AuthService {
     localStorage.removeItem('jws_token');
     // window.location.reload();
     // no es necesario hacer logout en el server
+    //this.newCustomerEmitted.emit({name, phone} as Customer);
+    this.isUserLogguedEmmit.emit(false);
+    this.router.navigateByUrl("users/login");
   }
 
   checkUserLogged(): boolean {
