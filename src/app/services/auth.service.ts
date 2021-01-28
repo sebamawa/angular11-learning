@@ -1,10 +1,8 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../interfaces/user';
-import { Subject } from "rxjs";
-import { Customer } from '../interfaces/customer';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -12,11 +10,11 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  //private isLoggedSubjectSource = new Subject<void>();
-  //public isLoggedSubject$ = this.isLoggedSubjectSource.asObservable();
-  @Output() isUserLogguedEmmit = new EventEmitter<boolean>();
-
   private usersApiUrl = 'http://localhost:3000'; 
+
+  // para mostrar items en el navbar si el usuario esta logueado o no
+  private isLoggedUserSource = new BehaviorSubject<boolean>(false);
+  public isLogguedUser$ = this.isLoggedUserSource.asObservable(); 
 
   constructor(
     private http: HttpClient,
@@ -40,6 +38,7 @@ export class AuthService {
     return this.http
       .post<string>(url, {email, password}, this.httpOptions)
       .pipe(
+        tap(_ => this.isLoggedUserSource.next(true)),
         catchError(this.handleError<User>(`loginUser()`))
       );
   }
@@ -59,10 +58,10 @@ export class AuthService {
   logoutUser(): void {
     // let jwsToken = localStorage.getItem('JWSToken');
     localStorage.removeItem('jws_token');
+    this.isLoggedUserSource.next(false);
     // window.location.reload();
     // no es necesario hacer logout en el server
     //this.newCustomerEmitted.emit({name, phone} as Customer);
-    this.isUserLogguedEmmit.emit(false);
     this.router.navigateByUrl("users/login");
   }
 

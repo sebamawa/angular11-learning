@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
     <!-- <nav class="navbar navbar-light" style="background-color: #e3f2fd;">    -->
-        <a *ngIf="isLogged" class="navbar-brand" routerLink="/dashboard">Dashboard</a> 
-        <a *ngIf="isLogged" class="navbar-brand" routerLink="/customers">Customers</a>
-        <a *ngIf="!isLogged" class="navbar-brand" routerLink="/users/login">Login</a>
-        <a *ngIf="isLogged" class="navbar-brand" style="cursor:pointer" (click)="onLogout()">Logout</a>
-        {{isLogged}}
+        <a *ngIf="isLoggedUser" class="navbar-brand" routerLink="/dashboard">Dashboard</a> 
+        <a *ngIf="isLoggedUser" class="navbar-brand" routerLink="/customers">Customers</a>
+        <a *ngIf="!isLoggedUser" class="navbar-brand" routerLink="/users/login">Login</a>
+        <a *ngIf="isLoggedUser" class="navbar-brand" style="cursor:pointer" (click)="onLogout()">Logout</a>
+        {{isLoggedUser}}
 </nav>
     

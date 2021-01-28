@@ -7,6 +7,6 @@
     <a class="navbar-brand" routerLink="/customers">Customers</a>
 </nav>
 <br> -->
-<app-navbar (isUserLogguedEmmit)="checkUserLoggued($event)"></app-navbar>
+<app-navbar [isLoggedUser]="authService.isLogguedUser$ | async"></app-navbar>
 <router-outlet></router-outlet>
 
