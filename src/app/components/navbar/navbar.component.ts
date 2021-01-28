@@ -8,11 +8,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
   
-  @Input() isLoggedUser: boolean = false;
+  @Input() infoUser: any;
 
   constructor(
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // this.isLogged = this.authService.checkUserLogged();

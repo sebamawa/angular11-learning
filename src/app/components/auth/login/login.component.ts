@@ -18,9 +18,9 @@ export class LoginComponent implements OnInit {
 
   onLogin(email: string, password: string) {
     this.authService.loginUser(email, password)
-      .subscribe(token => { 
-        console.log(token);
-        this.authService.setToken(token);
+      .subscribe(response => { 
+        console.log(response);
+        this.authService.setToken(response);
         this.router.navigateByUrl('/customers');
         //this.router.navigate(['/customers']);
         // location.reload();

@@ -13,8 +13,9 @@ export class AuthService {
   private usersApiUrl = 'http://localhost:3000'; 
 
   // para mostrar items en el navbar si el usuario esta logueado o no
-  private isLoggedUserSource = new BehaviorSubject<boolean>(false);
-  public isLogguedUser$ = this.isLoggedUserSource.asObservable(); 
+  // si se recarga la pagina solo verifica que el token esta en el localstorage
+  private infoUserSource = new BehaviorSubject<Object>({isLoggued: this.checkUserLogged(), username:''});
+  public infoUser$ = this.infoUserSource.asObservable(); 
 
   constructor(
     private http: HttpClient,
@@ -38,17 +39,25 @@ export class AuthService {
     return this.http
       .post<string>(url, {email, password}, this.httpOptions)
       .pipe(
-        tap(_ => this.isLoggedUserSource.next(true)),
+        tap(_ => this.infoUserSource.next({isLoggued: true, username: this.getInfoUserLoggued().username})),
         catchError(this.handleError<User>(`loginUser()`))
       );
   }
 
-  setToken(token: string): void{
-    localStorage.setItem("jws_token", Object.values(token)[0]);
+  setToken(response: Object): void{
+    localStorage.setItem("jws_token", Object.values(response)[0]);
+    localStorage.setItem("username", (Object.values(response)[1]).username);
   }
 
   private getToken(): string {
     return localStorage.getItem("jws_token");
+  }
+
+  getInfoUserLoggued() {
+    return {
+      token: localStorage.getItem("jws_token"),
+      username: localStorage.getItem("username")
+    }
   }
 
   // private getCurrentUser(): User {
@@ -58,7 +67,7 @@ export class AuthService {
   logoutUser(): void {
     // let jwsToken = localStorage.getItem('JWSToken');
     localStorage.removeItem('jws_token');
-    this.isLoggedUserSource.next(false);
+    this.infoUserSource.next({isLoggued: false, username:''});
     // window.location.reload();
     // no es necesario hacer logout en el server
     //this.newCustomerEmitted.emit({name, phone} as Customer);
@@ -69,10 +78,11 @@ export class AuthService {
     // mejorar checkeo de user logeado
     // solo verifica si esta el token en el localstorage
     let tk = this.getToken();
-    if (tk)
-      return true;
-    else
-      return false;
+    return tk != undefined;
+    // if (tk)
+    //   return true;
+    // else
+    //   return false;
   }
 
   /**

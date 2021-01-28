@@ -7,6 +7,6 @@
     <a class="navbar-brand" routerLink="/customers">Customers</a>
 </nav>
 <br> -->
-<app-navbar [isLoggedUser]="authService.isLogguedUser$ | async"></app-navbar>
+<app-navbar [infoUser]="authService.infoUser$ | async"></app-navbar>
 <router-outlet></router-outlet>
 
