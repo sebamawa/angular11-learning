@@ -1,0 +1,47 @@
+<div class="container">
+    <h4>Payment form</h4>
+    <form (ngSubmit)="onSubmit(); paymentForm.reset()" name="paymentForm" #paymentForm="ngForm">
+        <!-- {{diagnostic}} -->
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" class="form-control" id="date" #name="ngModel"
+                required
+                [(ngModel)]="model.date" name="date"> 
+            <!-- alerta de error -->
+            <!-- <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                Name is required
+            </div> -->
+                <!-- TODO: remove this: {{model.name}}  -->
+        </div>
+        <div class="form-group">
+            <label for="customers">Clientes</label>
+            <select>
+                <option *ngFor="let customer of customers">{{customer.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Descripción</label>
+            <input type="text" class="form-control" id="description" #phone="ngModel"
+                required
+                [(ngModel)]="model.description" name="description">
+            <!-- <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
+                Phone is required
+            </div> -->
+        </div>
+        <div class="form-group">
+            <label for="amount">Monto</label>
+            <input type="number" class="form-control" id="amount" #phone="ngModel"
+                required
+                [(ngModel)]="model.amount" name="amount">
+            <!-- <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
+                Phone is required
+            </div> -->
+        </div>            
+        <div>
+            <!-- (click)="newCustomer(); customerForm.reset()" -->
+            <button type="submit" class="btn btn-primary btn-lg btn-block"
+                [disabled]="!paymentForm.form.valid"
+            >New Payment</button>  
+        </div>
+    </form>
+</div>

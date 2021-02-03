@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CustomerFormComponent } from './components/customers/customer-form/customer-form.component';
+import { PaymentFormComponent } from './components/payments/payment-form/payment-form.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CustomerFormComponent } from './components/customers/customer-form/cust
     RegisterComponent,
     NavbarComponent,
     CustomerFormComponent,
+    PaymentFormComponent,
   ],
   imports: [
     BrowserModule,

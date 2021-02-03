@@ -11,7 +11,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class CustomerService {
 
-  private customersApiUrl = 'http://localhost:3000/customers'; // URL to web api (loopback 4)
+  private customersApiUrl = 'http://192.168.1.46:3000/customers'; // URL to web api (loopback 4)
   // para el put en updateCustomer()
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
