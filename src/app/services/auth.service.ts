@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  private usersApiUrl = 'http://192.168.1.46:3000'; 
+  private usersApiUrl = 'http://localhost:3000'; 
 
   // para mostrar items en el navbar si el usuario esta logueado o no
   // si se recarga la pagina solo verifica que el token esta en el localstorage
