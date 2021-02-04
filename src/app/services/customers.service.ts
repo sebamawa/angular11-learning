@@ -4,7 +4,8 @@ import { Observable, of } from 'rxjs';
 
 import { Customer } from '../interfaces/customer';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { Payment } from '../interfaces/payment';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,15 @@ export class CustomerService {
       tap(_ => console.log('customer deleted')),
       catchError(this.handleError<Customer>('deleteHero'))
     );
+  }
+
+  getPaymentsPerCustomer(clienteId: number): Observable<Payment[]> {
+    const url = `${this.customersApiUrl}/${clienteId}/payments`;
+    return this.http.get<Payment[]>(url)
+      .pipe(
+        tap(_ => console.log(`Payments of client: ${clienteId}`)),
+        catchError(this.handleError<Payment[]>(`getPaymentsPerCustomer id=${clienteId}`))
+      );    
   }
 
   /**

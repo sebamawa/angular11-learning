@@ -14,6 +14,7 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CustomerFormComponent } from './components/customers/customer-form/customer-form.component';
 import { PaymentFormComponent } from './components/payments/payment-form/payment-form.component';
+import { PaymentsPerCustomerComponent } from './components/customers/payments-per-customer/payments-per-customer/payments-per-customer.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PaymentFormComponent } from './components/payments/payment-form/payment
     NavbarComponent,
     CustomerFormComponent,
     PaymentFormComponent,
+    PaymentsPerCustomerComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
     <!-- <nav class="navbar navbar-light" style="background-color: #e3f2fd;">    -->
         <a *ngIf="infoUser.isLoggued" class="navbar-brand" routerLink="/dashboard">Dashboard</a> 
-        <a *ngIf="infoUser.isLoggued" class="navbar-brand" routerLink="/customers">Customers</a>
+        <a *ngIf="infoUser.isLoggued" class="navbar-brand" routerLink="/customers">Clientes</a>
+        <a *ngIf="infoUser.isLoggued" class="navbar-brand" routerLink="/payment">Agregar pago</a>
         <a *ngIf="!infoUser.isLoggued" class="navbar-brand navbar-nav ml-auto" routerLink="/users/login">Login</a>
         <a *ngIf="infoUser.isLoggued" class="navbar-brand navbar-nav ml-auto" style="cursor:pointer;" (click)="onLogout()">Logout</a>
         <a *ngIf="infoUser.isLoggued">{{infoUser.username}}</a> 

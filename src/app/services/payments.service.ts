@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Payment } from '../interfaces/payment';
 
 @Injectable({
@@ -21,7 +22,21 @@ export class PaymentsService {
   addPayment(payment: Payment): Observable<Payment> {
     return this.http.post<Payment>(this.paymentsApiUrl, payment, this.httpOptions)
       .pipe(
-        // catchError(this.handleError<Customer>('addCustomer'))
+         catchError(this.handleError<Payment>('addCustomer'))
       );
+  } 
+  
+  /**
+   * maneja la operacion Http que falla y permite a la app continuar
+   * @param operation - nombre de la operacion que falla
+   * @param result - valor opcional para retornar un resultado Observable
+   */
+  private handleError<T>(operation = 'opeation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.log(error);
+
+      // la app continua corriendo retornando un resultado vacio
+      return of(result as T);
+    }
   }  
 }

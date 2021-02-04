@@ -18,3 +18,5 @@
     <br>
     <button (click)="goBack()">go back</button>
 </div>
+
+<app-payments-per-customer *ngIf="customer" [customerId]="customer.id"></app-payments-per-customer>

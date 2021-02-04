@@ -34,10 +34,6 @@ export class CustomerDetailComponent implements OnInit {
     this.location.back(); // el service Location usa el stack del historico del browser
   }
 
-  deleteCustomer(id: number) {
-    alert("Por ahora no se eliminan customers (http) ...");
-  }
-
   save(): void {
     this.customerService.updateCustomer(this.customer)
       .subscribe(() => this.goBack())
