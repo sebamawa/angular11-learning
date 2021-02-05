@@ -19,8 +19,10 @@ export class PaymentFormComponent implements OnInit {
     private customersService: CustomerService,
     private paymentService: PaymentsService) { }
 
-  onSubmit(datePayment: any, idCustomer: string, description: string, amount: number, pending: boolean) {
-    let customerId: number = parseInt(idCustomer);
+  onSubmit(datePayment: any, customerId: number, description: string, amount: number, pending: boolean) {
+    // console.log(typeof(customerId));
+    // let customerId: number = parseInt(idCustomer);
+    // console.log(typeof(customerId));
     const [year, month, day] = datePayment.split("-")
     const date = new Date(year, month - 1, day)
     
@@ -31,7 +33,8 @@ export class PaymentFormComponent implements OnInit {
   selectChangeHandler (event: any) {
     //update the ui
     // console.log(event.target.value); // id de customer del option del select clickeado
-    this.customerIdSelected = event.target.value;
+    // console.log(event.target.value);
+    this.customerIdSelected = parseInt(event.target.value);
   }
 
   onChangeDate(value){

@@ -21,7 +21,7 @@
             <!-- <label for="customers">Cliente</label> -->
             <select class="form-control" (change)="selectChangeHandler($event)">
                 <option class="form-control">Seleccione cliente</option>
-                <option *ngFor="let customer of customers" value="{{customer.id}}">{{customer.name}}</option>
+                <option *ngFor="let customer of customers" value={{customer.id}}>{{customer.name}}</option>
             </select>
         </div>
         <!-- <p>Selected option: {{selectedCustomerName}}</p> -->
