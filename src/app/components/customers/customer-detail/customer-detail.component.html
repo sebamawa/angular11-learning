@@ -1,22 +1,27 @@
-<div *ngIf="customer">
-    <h2>{{customer.name | uppercase }} Details</h2>
-    <div><span>id: </span>{{customer.id}}</div>
-    <div><span>phone: </span>{{customer.phone}}</div>
-    <!-- <div><span>name: </span>{{customer.name }}</div> -->
+<div class="container">
+    <div class="row">
+        <div *ngIf="customer" class="col-sm-4">
+            <h4>Info. de {{customer.name | uppercase }}</h4>
+            <div><span>id: </span>{{customer.id}}</div>
+            <div><span>phone: </span>{{customer.phone}}</div>
+            <!-- <div><span>name: </span>{{customer.name }}</div> -->
 
-    <div>
-        <label>name:
-            <input [(ngModel)]="customer.name" placeholder="name">
-        </label>
-        <br>
-        <label>phone:
-            <input [(ngModel)]="customer.phone" placeholder="phone">
-        </label>
-    </div>
+            <div>
+                <label>name:
+                    <input [(ngModel)]="customer.name" placeholder="name">
+                </label>
+                <br>
+                <label>phone:
+                    <input [(ngModel)]="customer.phone" placeholder="phone">
+                </label>
+            </div>
 
-    <button (click)="save()">save</button>
-    <br>
-    <button (click)="goBack()">go back</button>
+            <button (click)="save()">Actualizar datos</button>
+            <br>
+            <button (click)="goBack()">go back</button>
+        </div>
+        <div *ngIf="customer" class="col-sm-8">
+            <app-payments-per-customer *ngIf="customer" [customerId]="customer.id"></app-payments-per-customer>
+        </div>  
+    </div>  
 </div>
-
-<app-payments-per-customer *ngIf="customer" [customerId]="customer.id"></app-payments-per-customer>

@@ -15,7 +15,8 @@ const routes: Routes = [
   {path: 'detail/:id', component: CustomerDetailComponent},
   {path: 'users/login', component: LoginComponent},
   {path: 'user/register', component: RegisterComponent},
-  {path: 'payment', component: PaymentFormComponent}
+  {path: 'payment', component: PaymentFormComponent},
+  {path: 'payment/:customerId', component: PaymentFormComponent}
 ];
 
 @NgModule({

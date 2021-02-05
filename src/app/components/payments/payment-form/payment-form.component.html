@@ -1,11 +1,11 @@
 <div class="container">
     <h4>Ingrese los datos del pago:</h4>
-    <form (ngSubmit)="onSubmit(date.value, customerIdSelected, description.value, amount.value, pending.value); 
+    <form (ngSubmit)="onSubmit(date.value, customer.value, description.value, amount.value, pending.value); 
         paymentForm.reset()" name="paymentForm" #paymentForm="ngForm">
         <!-- {{diagnostic}} -->
         <div class="form-group">
             <label for="date">Fecha</label>
-            <input type="date" class="form-control" id="date" #date="ngModel" 
+            <input type="date" class="form-control" id="date" #date="ngModel"
                 [(ngModel)]="model.date" name="date" (ngModelChange)="onChangeDate($event)"
                 required>
 
@@ -19,9 +19,13 @@
         <p>Date: {{model.date}}</p>
         <div class="form-group">
             <!-- <label for="customers">Cliente</label> -->
-            <select class="form-control" (change)="selectChangeHandler($event)">
-                <option class="form-control">Seleccione cliente</option>
-                <option *ngFor="let customer of customers" value={{customer.id}}>{{customer.name}}</option>
+            <select class="custom-select custom-select-lg mb-3"
+                [(ngModel)]="model.customer" (ngModelChange)="onChangeSelectOption($customer)"
+                id="customer" #customer="ngModel" name="customer"
+                required
+            >
+                <option [selected]="selectedCustomer" [value]="selectedCustomer" class="form-control">{{selectedCustomer.name}}</option>
+                <option *ngFor="let customer of customers" [ngValue]="customer">{{customer.name}}</option>
             </select>
         </div>
         <!-- <p>Selected option: {{selectedCustomerName}}</p> -->

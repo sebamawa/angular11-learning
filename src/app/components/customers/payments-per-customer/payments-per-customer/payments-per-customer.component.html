@@ -1,3 +1,5 @@
+<h4>Pagos</h4>
+<button (click)="addPaymentFromCustomer()">Agregar Pago</button>
 <table class="table">
     <tr style="background-color: bisque;">
         <th>Fecha</th>
@@ -8,7 +10,7 @@
     </tr>
     <!-- uso de routerLink en <tr/> (No en <a/>) con estilo .table tr:hover {cursor: pointer} -->
     <tr *ngFor="let payment of  payments">
-        <td>{{payment.date}}</td> 
+        <td>{{payment.date | date:"dd/MM/yy"}}</td> 
         <td>{{payment.description}} </td>   
         <td><span>$ </span><strong>{{payment.amount}}</strong> 
         <td>{{payment.pending}} </td>
