@@ -3,9 +3,8 @@ import { Customer } from 'src/app/interfaces/customer';
 import { Payment } from 'src/app/interfaces/payment';
 import { CustomerService } from 'src/app/services/customers.service';
 import { PaymentsService } from 'src/app/services/payments.service';
-import { Location } from '@angular/common';
-import * as moment from 'moment';
-import { ActivatedRoute } from '@angular/router';
+//import * as moment from 'moment';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment-form',
@@ -15,28 +14,30 @@ import { ActivatedRoute } from '@angular/router';
 export class PaymentFormComponent implements OnInit {
 
   @Input() clienteId: number;
-  model = new Payment(null, null, '', false, null);
-  customers: Customer[];
+  model = new Payment(new Date().toISOString().slice(0,10), null, '', false, null);
+  customers: Customer[] = []; //[new Customer("Fulanito", "099", 100)];
   selectedCustomer: Customer;
+  customerAlreadySelected: boolean = false;
+  // dateString: string = "2021-11-11";
 
   constructor(
     private customersService: CustomerService,
     private paymentService: PaymentsService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private router: Router) {
+      //const customerId = +this.route.snapshot.paramMap.get('customerId'); // obtengo id de la ruta
+      console.log(this.customers);
+    }
 
-  onSubmit(datePayment: any, customer: Customer, description: string, amount: number, pending: boolean) {
-    // console.log(typeof(customerId));
-    // let customerId: number = parseInt(idCustomer);
-    // console.log(typeof(customerId));
-    const [year, month, day] = datePayment.split("-")
-    const date = new Date(year, month - 1, day)
-    
+  onSubmit(date: string, customer: Customer, description: string, amount: number, pending: boolean) {
+    // const [year, month, day] = dateString.split("-")
+    // const date = new Date(year, month - 1, day)
     // const payment = new Payment(date, customerId, description, amount, pending); //no matchea por CustomerId
-    const customerId = customer.id;
-    const payment = {date, customerId, description, amount, pending} ;//as Payment; // NO es necesario el as
-    console.log(payment);
+    // const customerId = customer.id;
+    const payment = {date, customer, description, amount, pending} ;//as Payment; // NO es necesario el as
+    // console.log(payment);
     this.paymentService.addPayment(payment)
-      .subscribe(); //(() => this.router.navigateByUrl(`detail/${customerId}`));
+      .subscribe(payment => this.router.navigateByUrl(`detail/${customer.id}`));
   }
 
   onChangeSelectOption(customer) {
@@ -47,17 +48,23 @@ export class PaymentFormComponent implements OnInit {
   onChangeDate($event) {}
 
   ngOnInit(): void {
-    //this.model.date = new Date();
+    // this.model.date = new Date(Date.parse("2021-10-12"));
     const customerId = +this.route.snapshot.paramMap.get('customerId'); // obtengo id de la ruta
+    // si es un pago para cliente ya elegido (desde details cliente)
     if (customerId) {
-      // this.model.description = "Esto es una prueba"; // OK
-      const c = new Customer("Sebastian Martinez", "123", 100);
-      this.selectedCustomer = c;
-      console.log(this.model.customer);
+      this.customersService.getCustomer(customerId)
+        .subscribe(customer => {
+          this.customerAlreadySelected = true;
+          this.selectedCustomer = customer;
+          this.model.customer = customer;
+          this.customers.push(customer);
+          //console.log(this.customers);
+        });
+    } else { // muestro lista de clientes para seleccionar uno
+      this.customersService.getCustomers()
+        .subscribe(
+          customers => this.customers = customers
+        );
     }
-    this.customersService.getCustomers()
-      .subscribe(
-        customers => this.customers = customers
-      );
   }
 }

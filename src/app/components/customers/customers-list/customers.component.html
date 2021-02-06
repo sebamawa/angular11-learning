@@ -1,6 +1,6 @@
 <!-- <h2>Customers</h2> -->
 <div class="row">
-    <div class="col-sm-5">
+    <div class="col-sm-7">
         <table class="table">
             <tr style="background-color: bisque;">
                 <th>id</th>
@@ -19,10 +19,7 @@
             </tr>
         </table>
     </div>
-    <div class="col-sm-2">
-        <button (click)="!enableAddCustomer">Add Customer</button>
-    </div>
-    <div *ngIf="enableAddCustomer" class="col-sm-5">
+    <div class="col-sm-5">
         <app-customer-form (newCustomerEmitted)="addCustomer($event)"></app-customer-form> 
     </div>
 </div>

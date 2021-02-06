@@ -13,7 +13,7 @@ export class CustomersComponent implements OnInit {
   // selectedCustomer: Customer;
 
   customers: Customer[]; // array de customers
-  enableAddCustomer: boolean = false;
+  // enableAddCustomer: boolean = false;
 
   constructor(private customerService: CustomerService) { }
 

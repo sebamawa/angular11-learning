@@ -1,5 +1,11 @@
-<h4>Pagos</h4>
-<button (click)="addPaymentFromCustomer()">Agregar Pago</button>
+<div id="side_bar" class="clearfix">
+    <h2 style="float: left;">Pagos:</h2>
+    <button class="btn btn-primary" 
+            style="float: right; position: relative; top: 10px; right: 10px;"
+            routerLink="/payment/{{customerId}}">
+        Agregar Pago
+    </button>
+</div>
 <table class="table">
     <tr style="background-color: bisque;">
         <th>Fecha</th>

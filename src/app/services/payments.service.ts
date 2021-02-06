@@ -20,7 +20,11 @@ export class PaymentsService {
 
   /** POST: add a new customer to the server */
   addPayment(payment: Payment): Observable<Payment> {
-    return this.http.post<Payment>(this.paymentsApiUrl, payment, this.httpOptions)
+    const [year, month, day] = payment.date.split("-")
+    const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    const paymentToSend = {date:date, customerId:payment.customer.id, description:payment.description,
+      amount:payment.amount, pending:payment.pending} 
+    return this.http.post<Payment>(this.paymentsApiUrl, paymentToSend, this.httpOptions)
       .pipe(
          catchError(this.handleError<Payment>('addCustomer'))
       );

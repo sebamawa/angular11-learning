@@ -12,12 +12,18 @@ h1 {
   }
   body {
     margin: 2em;
+    font-size: larger;
   }
-  body, input[type="text"], button {
-    background-color:wheat;
+  body {
+    font-size: larger;
+    background-color:palegreen;
     color: #333;
     font-family: Cambria, Georgia;
   }
+  input {
+    font-size: xx-large;
+  }
+
   /* everywhere else */
   * {
     font-family: Arial, Helvetica, sans-serif;

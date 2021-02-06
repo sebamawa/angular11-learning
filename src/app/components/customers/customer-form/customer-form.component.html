@@ -1,5 +1,5 @@
 <div class="container">
-    <h4>Ingrese los datos del cliente:</h4>
+    <h4>Nuevo cliente:</h4>
     <form (ngSubmit)="onSubmit(name.value, phone.value); customerForm.reset()" name="customerForm" #customerForm="ngForm">
         <!-- {{diagnostic}} -->
         <div class="form-group">
@@ -25,7 +25,7 @@
             <!-- (click)="newCustomer(); customerForm.reset()" -->
             <button type="submit" class="btn btn-primary btn-lg btn-block"
                 [disabled]="!customerForm.form.valid"
-            >New Customer</button>  
+            >Agregar</button>  
         </div>
     </form>
 </div>
